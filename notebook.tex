@@ -1,0 +1,557 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{week1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    2.1
+
+ I currently work as a Data Scientist for a financial firm based in New
+York that lends money to small businesses. The project I'm working on
+involves modeling using the past applicants data to predict the outcome
+of future applicants to decide whether to approve or reject the loan.
+The problem faced during this modeling is lack of data -\/- since it's
+been only 4 years since the firm started and we don't have enough data
+to work with. However, we decided to use bootstrap sampling and simple
+hypothesis (logistic regression, decision trees) to build a classifier.
+Although we had more than 25 variables, I will name some of the most
+important ones.
+
+The top features are 1. FICO score 2. Length of credit history 3. Annual
+Revenue 4. Time in business 5. Utilization of credit (\%)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kp}{suppressWarnings}\PY{p}{(}\PY{k+kp}{suppressMessages}\PY{p}{(}\PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{kernlab\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{suppressWarnings}\PY{p}{(}\PY{k+kp}{suppressMessages}\PY{p}{(}\PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{caret\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{suppressWarnings}\PY{p}{(}\PY{k+kp}{suppressMessages}\PY{p}{(}\PY{k+kn}{library}\PY{p}{(}kknn\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} data \PY{o}{\PYZlt{}\PYZhy{}} read.table\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./credit\PYZus{}card\PYZus{}data.txt\PYZdq{}}\PY{p}{,} header \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} c\PYZus{}list \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0.00001}\PY{p}{,} \PY{l+m}{0.001}\PY{p}{,} \PY{l+m}{0.01}\PY{p}{,} \PY{l+m}{0.1}\PY{p}{,} \PY{l+m}{1}\PY{p}{,} \PY{l+m}{3}\PY{p}{,} \PY{l+m}{5}\PY{p}{,} \PY{l+m}{10}\PY{p}{,} \PY{l+m}{15}\PY{p}{,} \PY{l+m}{20}\PY{p}{,} \PY{l+m}{100}\PY{p}{,} \PY{l+m}{1000}\PY{p}{,} \PY{l+m}{1000000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kr}{for} \PY{p}{(}\PY{k+kt}{c} \PY{k+kr}{in} c\PYZus{}list\PY{p}{)}\PY{p}{\PYZob{}}
+            \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} For C = \PYZdq{}}\PY{p}{,} \PY{k+kt}{c}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{ \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZbs{}n\PYZdq{}}\PY{p}{)}
+            model \PY{o}{\PYZlt{}\PYZhy{}} ksvm\PY{p}{(}\PY{k+kp}{as.matrix}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{k+kp}{as.factor}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{11}\PY{p}{]}\PY{p}{)}\PY{p}{,}type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{C\PYZhy{}svc\PYZdq{}}\PY{p}{,}kernel\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{vanilladot\PYZdq{}}\PY{p}{,}C\PY{o}{=}\PY{k+kt}{c}\PY{p}{,}scaled\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+            prediction \PY{o}{\PYZlt{}\PYZhy{}} predict\PY{p}{(}model\PY{p}{,} \PY{k+kp}{as.matrix}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            result \PY{o}{\PYZlt{}\PYZhy{}} confusionMatrix\PY{p}{(}prediction\PY{p}{,} \PY{k+kp}{as.factor}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{11}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            accuracy \PY{o}{\PYZlt{}\PYZhy{}} result\PY{o}{\PYZdl{}}overall\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{Accuracy\PYZdq{}}\PY{p}{]}\PY{o}{*}\PY{l+m}{100}
+            precision \PY{o}{\PYZlt{}\PYZhy{}} result\PY{o}{\PYZdl{}}byClass\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Pos Pred Value\PYZsq{}}\PY{p}{]}
+            recall \PY{o}{\PYZlt{}\PYZhy{}} result\PY{o}{\PYZdl{}}byClass\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Sensitivity\PYZsq{}}\PY{p}{]}
+            \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}nAccuracy: \PYZdq{}}\PY{p}{,} accuracy\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZpc{}\PYZdq{}}\PY{p}{)}
+            \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}nPrecision: \PYZdq{}}\PY{p}{,} precision\PY{p}{)}
+            \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}nRecall: \PYZdq{}}\PY{p}{,} recall\PY{p}{)}
+            f\PYZus{}measure \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{2} \PY{o}{*} \PY{p}{(}\PY{p}{(}precision \PY{o}{*} recall\PY{p}{)} \PY{o}{/} \PY{p}{(}precision \PY{o}{+} recall\PY{p}{)}\PY{p}{)}
+            \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}nF1 score: \PYZdq{}}\PY{p}{,} f\PYZus{}measure\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+----- For C =  1e-05  -----
+ Setting default kernel parameters  
+
+Accuracy:  54.74006 \%
+Precision:  0.5474006
+Recall:  1
+F1 score:  0.7075099
+----- For C =  0.001  -----
+ Setting default kernel parameters  
+
+Accuracy:  83.79205 \%
+Precision:  0.8088235
+Recall:  0.9217877
+F1 score:  0.8616188
+----- For C =  0.01  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  0.1  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  1  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  3  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  5  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  10  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  15  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  20  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  100  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.39144 \%
+Precision:  0.9438944
+Recall:  0.7988827
+F1 score:  0.8653555
+----- For C =  1000  -----
+ Setting default kernel parameters  
+
+Accuracy:  86.23853 \%
+Precision:  0.9407895
+Recall:  0.7988827
+F1 score:  0.8640483
+----- For C =  1e+06  -----
+ Setting default kernel parameters  
+
+Accuracy:  62.53823 \%
+Precision:  0.6637681
+Recall:  0.6396648
+F1 score:  0.6514936
+    \end{Verbatim}
+
+    Conclusion: Accuracy decreases for extremely low and higher values of C.
+C = 1e-05 -\/-\/-\/-\textgreater{} Accuracy = 54.74\% C = 1e+06
+-\/-\/-\/-\textgreater{} Accuracy = 62.54\%
+
+It is interesting to note that the metrics accuracy, precision, recall
+remain same for all values tested between 0.01 and 100.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}picking the default model used in the homework C = 100 to obtain the coefficients.}
+        model \PY{o}{\PYZlt{}\PYZhy{}} ksvm\PY{p}{(}\PY{k+kp}{as.matrix}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{k+kp}{as.factor}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{11}\PY{p}{]}\PY{p}{)}\PY{p}{,}type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{C\PYZhy{}svc\PYZdq{}}\PY{p}{,}kernel\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{vanilladot\PYZdq{}}\PY{p}{,}C\PY{o}{=}\PY{l+m}{100}\PY{p}{,}scaled\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} calculate a1...am}
+        a \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{colSums}\PY{p}{(}model\PY{o}{@}xmatrix\PY{p}{[[}\PY{l+m}{1}\PY{p}{]]} \PY{o}{*} model\PY{o}{@}coef\PY{p}{[[}\PY{l+m}{1}\PY{p}{]]}\PY{p}{)} 
+        a
+        \PY{c+c1}{\PYZsh{} calculate a0}
+        a0 \PY{o}{\PYZlt{}\PYZhy{}} \PY{o}{\PYZhy{}}model\PY{o}{@}b
+        a0
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ Setting default kernel parameters  
+
+    \end{Verbatim}
+
+    \begin{description*}
+\item[V1] -0.00100653481057611
+\item[V2] -0.00117290480611665
+\item[V3] -0.00162619672236963
+\item[V4] 0.0030064202649194
+\item[V5] 1.00494056410556
+\item[V6] -0.00282594323043472
+\item[V7] 0.000260029507016313
+\item[V8] -0.000534955143494997
+\item[V9] -0.00122837582291523
+\item[V10] 0.106363399527188
+\end{description*}
+
+
+    
+    0.081584921659538
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}trying different kernel. Someone mentioned on the slack channel rbfdot kernel gets almost 100\PYZpc{} accuracy. So lets try}
+        model \PY{o}{\PYZlt{}\PYZhy{}} ksvm\PY{p}{(}\PY{k+kp}{as.matrix}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{k+kp}{as.factor}\PY{p}{(}data\PY{p}{[}\PY{p}{,} \PY{l+m}{11}\PY{p}{]}\PY{p}{)}\PY{p}{,}type\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{C\PYZhy{}svc\PYZdq{}}\PY{p}{,}kernel\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{rbfdot\PYZdq{}}\PY{p}{,}C\PY{o}{=}\PY{l+m}{100}\PY{p}{,}scaled\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+        pred \PY{o}{\PYZlt{}\PYZhy{}} predict\PY{p}{(}model\PY{p}{,}data\PY{p}{[}\PY{p}{,}\PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{]}\PY{p}{)}
+        \PY{k+kp}{sum}\PY{p}{(}pred \PY{o}{==} data\PY{p}{[}\PY{p}{,}\PY{l+m}{11}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{k+kp}{nrow}\PY{p}{(}data\PY{p}{)}
+\end{Verbatim}
+
+
+    0.954128440366973
+
+    
+    It can be seen that 95\% accuracy is achieved. However, this is a clear
+case of overfitting where the classifier performs well on the training
+data (data which the classifier has seen or rather data used to train
+the classifier) but will yield poor performance on data which it has not
+seen. Hence, we will get poor generalization.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} data\PY{o}{\PYZdl{}}V11 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{as.factor}\PY{p}{(}data\PY{o}{\PYZdl{}}V11\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kr}{for} \PY{p}{(}k \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{20}\PY{p}{)}\PY{p}{\PYZob{}}
+            pred \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+            \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}data\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+                knn \PY{o}{\PYZlt{}\PYZhy{}} kknn\PY{p}{(}V11 \PY{o}{\PYZti{}} \PY{l+m}{.}\PY{p}{,}data\PY{p}{[}\PY{o}{\PYZhy{}}i\PY{p}{,} \PY{p}{]}\PY{p}{,} data\PY{p}{[}i\PY{p}{,} \PY{p}{]}\PY{p}{,} k \PY{o}{=} k\PY{p}{,} distance \PY{o}{=} \PY{l+m}{2}\PY{p}{,} kernel \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{rectangular\PYZdq{}}\PY{p}{,} scale\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+                pred \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}pred\PY{p}{,} knn\PY{o}{\PYZdl{}}fitted.values\PY{p}{)}
+            \PY{p}{\PYZcb{}}
+            pred \PY{o}{\PYZlt{}\PYZhy{}} pred\PY{l+m}{\PYZhy{}1}
+            accuracy \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sum}\PY{p}{(}pred \PY{o}{==} data\PY{p}{[}\PY{p}{,}\PY{l+m}{11}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{k+kp}{nrow}\PY{p}{(}data\PY{p}{)}
+            \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n For K = \PYZdq{}}\PY{p}{,} k\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{accuracy = \PYZdq{}}\PY{p}{,} accuracy\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}       
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+ For K =  1 accuracy =  0.8149847 
+
+ For K =  2 accuracy =  0.8149847 
+
+ For K =  3 accuracy =  0.82263 
+
+ For K =  4 accuracy =  0.82263 
+
+ For K =  5 accuracy =  0.8455657 
+
+ For K =  6 accuracy =  0.8455657 
+
+ For K =  7 accuracy =  0.8470948 
+
+ For K =  8 accuracy =  0.8470948 
+
+ For K =  9 accuracy =  0.8318043 
+
+ For K =  10 accuracy =  0.8318043 
+
+ For K =  11 accuracy =  0.8348624 
+
+ For K =  12 accuracy =  0.8348624 
+
+ For K =  13 accuracy =  0.8302752 
+
+ For K =  14 accuracy =  0.8302752 
+
+ For K =  15 accuracy =  0.8256881 
+
+ For K =  16 accuracy =  0.8256881 
+
+ For K =  17 accuracy =  0.82263 
+
+ For K =  18 accuracy =  0.82263 
+
+ For K =  19 accuracy =  0.82263 
+
+ For K =  20 accuracy =  0.82263 
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
