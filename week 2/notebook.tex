@@ -1,0 +1,614 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{week 2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}importing the necessary packages}
+        \PY{k+kp}{suppressWarnings}\PY{p}{(}\PY{k+kp}{suppressMessages}\PY{p}{(}\PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{kernlab\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{suppressWarnings}\PY{p}{(}\PY{k+kp}{suppressMessages}\PY{p}{(}\PY{k+kn}{library}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{caret\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{suppressWarnings}\PY{p}{(}\PY{k+kp}{suppressMessages}\PY{p}{(}\PY{k+kn}{library}\PY{p}{(}kknn\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{suppressWarnings}\PY{p}{(}\PY{k+kp}{suppressMessages}\PY{p}{(}\PY{k+kn}{library}\PY{p}{(}pROC\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}reading the data from text file}
+        data \PY{o}{\PYZlt{}\PYZhy{}} read.table\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{./credit\PYZus{}card\PYZus{}data\PYZhy{}headers.txt\PYZdq{}}\PY{p}{,} header \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kp}{head}\PY{p}{(}data\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllllllllll}
+ A1 & A2 & A3 & A8 & A9 & A10 & A11 & A12 & A14 & A15 & R1\\
+\hline
+	 1     & 30.83 & 0.000 & 1.25  & 1     & 0     & 1     & 1     & 202   &   0   & 1    \\
+	 0     & 58.67 & 4.460 & 3.04  & 1     & 0     & 6     & 1     &  43   & 560   & 1    \\
+	 0     & 24.50 & 0.500 & 1.50  & 1     & 1     & 0     & 1     & 280   & 824   & 1    \\
+	 1     & 27.83 & 1.540 & 3.75  & 1     & 0     & 5     & 0     & 100   &   3   & 1    \\
+	 1     & 20.17 & 5.625 & 1.71  & 1     & 1     & 0     & 1     & 120   &   0   & 1    \\
+	 1     & 32.08 & 4.000 & 2.50  & 1     & 1     & 0     & 0     & 360   &   0   & 1    \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}converting A1, A9, A10, A12 and R1 to factors since they are categorical variables.}
+        
+        \PY{c+c1}{\PYZsh{}columns to be converted to factor}
+        cols \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{A1\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{A9\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{A10\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{A12\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{R1\PYZdq{}}\PY{p}{)}
+        data\PY{p}{[}cols\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{lapply}\PY{p}{(}data\PY{p}{[}cols\PY{p}{]}\PY{p}{,} \PY{k+kp}{factor}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} 80\PYZpc{} of the data is reserved for training \PYZhy{}\PYZhy{} which will eventually be split into 10 parts to perform cross validation.}
+        \PY{c+c1}{\PYZsh{} remaining 20\PYZpc{} is used for testing \PYZhy{}\PYZhy{} evaluating the performance of best model selected.}
+        \PY{k+kp}{set.seed}\PY{p}{(}\PY{l+m}{42}\PY{p}{)}
+        smp\PYZus{}size \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{floor}\PY{p}{(}\PY{l+m}{0.8} \PY{o}{*} \PY{k+kp}{nrow}\PY{p}{(}data\PY{p}{)}\PY{p}{)}
+        
+        train\PYZus{}ind \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sample}\PY{p}{(}\PY{k+kp}{seq\PYZus{}len}\PY{p}{(}\PY{k+kp}{nrow}\PY{p}{(}data\PY{p}{)}\PY{p}{)}\PY{p}{,} size \PY{o}{=} smp\PYZus{}size\PY{p}{)}
+        train \PY{o}{\PYZlt{}\PYZhy{}} data\PY{p}{[}train\PYZus{}ind\PY{p}{,} \PY{p}{]}
+        test \PY{o}{\PYZlt{}\PYZhy{}} data\PY{p}{[}\PY{o}{\PYZhy{}}train\PYZus{}ind\PY{p}{,} \PY{p}{]}
+        
+        knn \PY{o}{\PYZlt{}\PYZhy{}} train.kknn\PY{p}{(}R1 \PY{o}{\PYZti{}}\PY{l+m}{.}\PY{p}{,} data \PY{o}{=} train\PY{p}{,} kmax \PY{o}{=} \PY{l+m}{15}\PY{p}{,} distance \PY{o}{=} \PY{l+m}{2}\PY{p}{,} 
+                       kernel \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{triangular\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{rectangular\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{epanechnikov\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{optimal\PYZdq{}}\PY{p}{)}\PY{p}{,}
+                       scale \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{)}
+        
+        knn\PY{o}{\PYZdl{}}best.parameters
+\end{Verbatim}
+
+
+    \begin{description}
+\item[\$kernel] 'rectangular'
+\item[\$k] 7
+\end{description}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} best\PYZus{}val\PYZus{}accuracy \PY{o}{\PYZlt{}\PYZhy{}} \PY{p}{(}\PY{l+m}{1}\PY{o}{\PYZhy{}}knn\PY{o}{\PYZdl{}}MISCLASS\PY{p}{)}\PY{p}{[}knn\PY{o}{\PYZdl{}}best.parameters\PY{o}{\PYZdl{}}k\PY{p}{,} knn\PY{o}{\PYZdl{}}best.parameters\PY{o}{\PYZdl{}}kernel\PY{p}{]}
+        best\PYZus{}val\PYZus{}accuracy
+\end{Verbatim}
+
+
+    0.850860420650096
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}evaluating the best selected model on test data}
+        test\PYZus{}accuracy \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sum}\PY{p}{(}predict\PY{p}{(}knn\PY{p}{,} test\PY{p}{)} \PY{o}{==} test\PY{p}{[}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{R1\PYZdq{}}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{k+kp}{nrow}\PY{p}{(}test\PY{p}{)}
+        test\PYZus{}accuracy
+\end{Verbatim}
+
+
+    0.854961832061069
+
+    
+    Note -\/- I do understand that my test accuracy is greater than
+validation accuracy -\/- but this is due to the random effect discussed
+in lectures. If i change the seed, I get different results and hence I
+believe that it isn't something wrong
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}exercise 3.1b}
+        
+        \PY{c+c1}{\PYZsh{}splitting the data into train, test and validation}
+        
+        spec \PY{o}{=} \PY{k+kt}{c}\PY{p}{(}train \PY{o}{=} \PY{l+m}{.6}\PY{p}{,} test \PY{o}{=} \PY{l+m}{.2}\PY{p}{,} validate \PY{o}{=} \PY{l+m}{.2}\PY{p}{)}
+        
+        g \PY{o}{=} \PY{k+kp}{sample}\PY{p}{(}\PY{k+kp}{cut}\PY{p}{(}
+          \PY{k+kp}{seq}\PY{p}{(}\PY{k+kp}{nrow}\PY{p}{(}data\PY{p}{)}\PY{p}{)}\PY{p}{,} 
+          \PY{k+kp}{nrow}\PY{p}{(}data\PY{p}{)}\PY{o}{*}\PY{k+kp}{cumsum}\PY{p}{(}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{0}\PY{p}{,}spec\PY{p}{)}\PY{p}{)}\PY{p}{,}
+          labels \PY{o}{=} \PY{k+kp}{names}\PY{p}{(}spec\PY{p}{)}
+        \PY{p}{)}\PY{p}{)}
+        
+        res \PY{o}{=} \PY{k+kp}{split}\PY{p}{(}data\PY{p}{,} g\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} train \PY{o}{\PYZlt{}\PYZhy{}} res\PY{o}{\PYZdl{}}train
+        validate \PY{o}{\PYZlt{}\PYZhy{}} res\PY{o}{\PYZdl{}}validate
+        test \PY{o}{\PYZlt{}\PYZhy{}} res\PY{o}{\PYZdl{}}test
+        
+        \PY{k+kr}{for} \PY{p}{(}k \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{10}\PY{p}{)}\PY{p}{\PYZob{}}
+            pred \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+            \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}validate\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+                knn \PY{o}{\PYZlt{}\PYZhy{}} kknn\PY{p}{(}R1 \PY{o}{\PYZti{}} \PY{l+m}{.}\PY{p}{,}train \PY{o}{=} train\PY{p}{,} test \PY{o}{=} validate\PY{p}{[}i\PY{p}{,} \PY{p}{]}\PY{p}{,} k \PY{o}{=} k\PY{p}{,} distance \PY{o}{=} \PY{l+m}{2}\PY{p}{,} kernel \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{rectangular\PYZdq{}}\PY{p}{,} scale\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+                pred \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}pred\PY{p}{,} knn\PY{o}{\PYZdl{}}fitted.values\PY{p}{)}
+            \PY{p}{\PYZcb{}}
+            pred \PY{o}{\PYZlt{}\PYZhy{}} pred\PY{l+m}{\PYZhy{}1}
+            accuracy \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sum}\PY{p}{(}pred \PY{o}{==} validate\PY{p}{[}\PY{p}{,}\PY{l+m}{11}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{k+kp}{nrow}\PY{p}{(}validate\PY{p}{)}
+            \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n For K = \PYZdq{}}\PY{p}{,} k\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{validation accuracy = \PYZdq{}}\PY{p}{,} accuracy\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}       
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+ For K =  1 validation accuracy =  0.7709924 
+
+ For K =  2 validation accuracy =  0.7709924 
+
+ For K =  3 validation accuracy =  0.8091603 
+
+ For K =  4 validation accuracy =  0.8091603 
+
+ For K =  5 validation accuracy =  0.8320611 
+
+ For K =  6 validation accuracy =  0.8320611 
+
+ For K =  7 validation accuracy =  0.8167939 
+
+ For K =  8 validation accuracy =  0.8167939 
+
+ For K =  9 validation accuracy =  0.8320611 
+
+ For K =  10 validation accuracy =  0.8320611 
+
+    \end{Verbatim}
+
+    It can be seen that the best model has K = 9
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}evaluating the test accuracy}
+         pred \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}test\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+             knn \PY{o}{\PYZlt{}\PYZhy{}} kknn\PY{p}{(}R1 \PY{o}{\PYZti{}} \PY{l+m}{.}\PY{p}{,}train \PY{o}{=} train\PY{p}{,} test \PY{o}{=} test\PY{p}{[}i\PY{p}{,} \PY{p}{]}\PY{p}{,} k \PY{o}{=} \PY{l+m}{9}\PY{p}{,} distance \PY{o}{=} \PY{l+m}{2}\PY{p}{,} kernel \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{rectangular\PYZdq{}}\PY{p}{,} scale\PY{o}{=}\PY{k+kc}{TRUE}\PY{p}{)}
+             pred \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}pred\PY{p}{,} knn\PY{o}{\PYZdl{}}fitted.values\PY{p}{)}
+             \PY{p}{\PYZcb{}}
+         pred \PY{o}{\PYZlt{}\PYZhy{}} pred\PY{l+m}{\PYZhy{}1}
+         accuracy \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sum}\PY{p}{(}pred \PY{o}{==} test\PY{p}{[}\PY{p}{,}\PY{l+m}{11}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{k+kp}{nrow}\PY{p}{(}test\PY{p}{)}
+         \PY{k+kp}{cat}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n For K = \PYZdq{}}\PY{p}{,} k\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{test accuracy = \PYZdq{}}\PY{p}{,} accuracy\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{\PYZbs{}n\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+ For K =  10 test accuracy =  0.8396947 
+
+    \end{Verbatim}
+
+    The test accuracy is 0.8396947
+
+    Exercise 4.1
+
+I work as a data scientist at a small business lending firm. Using past
+data, we decide on who should be granted a loan. However, we cannot say
+anything about those who were rejected. This is called as rejection
+inference. Hence, we use clustering to group the rejected applicants and
+find some pattern that could help us improve our decision making
+process. Features used are FICO, Time in business, Industry Risk (we
+have classified major industries into three categories -\/- High Risk,
+Medium Risk and Low Risk), Annual Revenue, Profit(\$)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{library}\PY{p}{(}datasets\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} str\PY{p}{(}iris\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+'data.frame':	150 obs. of  5 variables:
+ \$ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 {\ldots}
+ \$ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 {\ldots}
+ \$ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 {\ldots}
+ \$ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 {\ldots}
+ \$ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 {\ldots}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}we don\PYZsq{}t need the response variable \PYZhy{}\PYZhy{} since it is an unsupervised task}
+         iris.new\PY{o}{\PYZlt{}\PYZhy{}} iris\PY{p}{[}\PY{p}{,}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{4}\PY{p}{)}\PY{p}{]}
+         iris.class\PY{o}{\PYZlt{}\PYZhy{}} iris\PY{p}{[}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Species\PYZdq{}}\PY{p}{]}
+         \PY{k+kp}{head}\PY{p}{(}iris.new\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llll}
+ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width\\
+\hline
+	 5.1 & 3.5 & 1.4 & 0.2\\
+	 4.9 & 3.0 & 1.4 & 0.2\\
+	 4.7 & 3.2 & 1.3 & 0.2\\
+	 4.6 & 3.1 & 1.5 & 0.2\\
+	 5.0 & 3.6 & 1.4 & 0.2\\
+	 5.4 & 3.9 & 1.7 & 0.4\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} normalize \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}x\PY{p}{)}\PY{p}{\PYZob{}}
+           \PY{k+kr}{return} \PY{p}{(}\PY{p}{(}x\PY{o}{\PYZhy{}}\PY{k+kp}{min}\PY{p}{(}x\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{k+kp}{max}\PY{p}{(}x\PY{p}{)}\PY{o}{\PYZhy{}}\PY{k+kp}{min}\PY{p}{(}x\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} iris.new\PY{o}{\PYZdl{}}Sepal.Length\PY{o}{\PYZlt{}\PYZhy{}} normalize\PY{p}{(}iris.new\PY{o}{\PYZdl{}}Sepal.Length\PY{p}{)}
+         iris.new\PY{o}{\PYZdl{}}Sepal.Width\PY{o}{\PYZlt{}\PYZhy{}} normalize\PY{p}{(}iris.new\PY{o}{\PYZdl{}}Sepal.Width\PY{p}{)}
+         iris.new\PY{o}{\PYZdl{}}Petal.Length\PY{o}{\PYZlt{}\PYZhy{}} normalize\PY{p}{(}iris.new\PY{o}{\PYZdl{}}Petal.Length\PY{p}{)}
+         iris.new\PY{o}{\PYZdl{}}Petal.Width\PY{o}{\PYZlt{}\PYZhy{}} normalize\PY{p}{(}iris.new\PY{o}{\PYZdl{}}Petal.Width\PY{p}{)}
+         \PY{k+kp}{head}\PY{p}{(}iris.new\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llll}
+ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width\\
+\hline
+	 0.22222222 & 0.6250000  & 0.06779661 & 0.04166667\\
+	 0.16666667 & 0.4166667  & 0.06779661 & 0.04166667\\
+	 0.11111111 & 0.5000000  & 0.05084746 & 0.04166667\\
+	 0.08333333 & 0.4583333  & 0.08474576 & 0.04166667\\
+	 0.19444444 & 0.6666667  & 0.06779661 & 0.04166667\\
+	 0.30555556 & 0.7916667  & 0.11864407 & 0.12500000\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k+kp}{set.seed}\PY{p}{(}\PY{l+m}{42}\PY{p}{)}
+         irisCluster\PY{o}{\PYZlt{}\PYZhy{}} kmeans\PY{p}{(}iris.new\PY{p}{,}\PY{l+m}{3}\PY{p}{,} nstart \PY{o}{=} \PY{l+m}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} par\PY{p}{(}mfrow\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{,} mar\PY{o}{=}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{5}\PY{p}{,}\PY{l+m}{4}\PY{p}{,}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{)}
+         plot\PY{p}{(}iris.new\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{]}\PY{p}{,} col\PY{o}{=}irisCluster\PY{o}{\PYZdl{}}cluster\PY{p}{)}
+         plot\PY{p}{(}iris.new\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{1}\PY{p}{,}\PY{l+m}{2}\PY{p}{)}\PY{p}{]}\PY{p}{,} col\PY{o}{=}iris.class\PY{p}{)}
+         plot\PY{p}{(}iris.new\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{4}\PY{p}{)}\PY{p}{]}\PY{p}{,} col\PY{o}{=}irisCluster\PY{o}{\PYZdl{}}cluster\PY{p}{)}
+         plot\PY{p}{(}iris.new\PY{p}{[}\PY{k+kt}{c}\PY{p}{(}\PY{l+m}{3}\PY{p}{,}\PY{l+m}{4}\PY{p}{)}\PY{p}{]}\PY{p}{,} col\PY{o}{=}iris.class\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kp}{table}\PY{p}{(}irisCluster\PY{o}{\PYZdl{}}cluster\PY{p}{,}iris.class\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+   iris.class
+    setosa versicolor virginica
+  1      0          3        36
+  2      0         47        14
+  3     50          0         0
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} k.max \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{10}
+         wss\PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sapply}\PY{p}{(}\PY{l+m}{1}\PY{o}{:}k.max\PY{p}{,}\PY{k+kr}{function}\PY{p}{(}k\PY{p}{)}\PY{p}{\PYZob{}}kmeans\PY{p}{(}iris.new\PY{p}{,}k\PY{p}{,}nstart \PY{o}{=} \PY{l+m}{20}\PY{p}{,}iter.max \PY{o}{=} \PY{l+m}{20}\PY{p}{)}\PY{o}{\PYZdl{}}tot.withinss\PY{p}{\PYZcb{}}\PY{p}{)}
+         wss
+\end{Verbatim}
+
+
+    \begin{enumerate*}
+\item 41.1661104213732
+\item 12.1277907505382
+\item 6.98221647378523
+\item 5.51693347204037
+\item 4.58032311523018
+\item 3.92309547935816
+\item 3.46893698592911
+\item 3.12825896306096
+\item 2.80143042665549
+\item 2.59047114716864
+\end{enumerate*}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} plot\PY{p}{(}\PY{l+m}{1}\PY{o}{:}k.max\PY{p}{,}wss\PY{p}{,} type\PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{b\PYZdq{}}\PY{p}{,} xlab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Number of clusters(k)\PYZdq{}}\PY{p}{,} ylab \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Within cluster sum of squares\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}it can clearly be seen that 3 is the correct number of clusters.}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
