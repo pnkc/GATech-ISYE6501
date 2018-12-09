@@ -1,0 +1,1120 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Untitled}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}reading the data}
+        data \PY{o}{\PYZlt{}\PYZhy{}} read.table\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./uscrime.txt\PYZsq{}}\PY{p}{,} stringsAsFactors \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{,} header \PY{o}{=} \PY{n+nb+bp}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}printing the head of the data}
+        \PY{k+kp}{head}\PY{p}{(}data\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllllllllll}
+ M & So & Ed & Po1 & Po2 & LF & M.F & Pop & NW & U1 & U2 & Wealth & Ineq & Prob & Time & Crime\\
+\hline
+	 15.1     & 1        &  9.1     &  5.8     &  5.6     & 0.510    &  95.0    &  33      & 30.1     & 0.108    & 4.1      & 3940     & 26.1     & 0.084602 & 26.2011  &  791    \\
+	 14.3     & 0        & 11.3     & 10.3     &  9.5     & 0.583    & 101.2    &  13      & 10.2     & 0.096    & 3.6      & 5570     & 19.4     & 0.029599 & 25.2999  & 1635    \\
+	 14.2     & 1        &  8.9     &  4.5     &  4.4     & 0.533    &  96.9    &  18      & 21.9     & 0.094    & 3.3      & 3180     & 25.0     & 0.083401 & 24.3006  &  578    \\
+	 13.6     & 0        & 12.1     & 14.9     & 14.1     & 0.577    &  99.4    & 157      &  8.0     & 0.102    & 3.9      & 6730     & 16.7     & 0.015801 & 29.9012  & 1969    \\
+	 14.1     & 0        & 12.1     & 10.9     & 10.1     & 0.591    &  98.5    &  18      &  3.0     & 0.091    & 2.0      & 5780     & 17.4     & 0.041399 & 21.2998  & 1234    \\
+	 12.1     & 0        & 11.0     & 11.8     & 11.5     & 0.547    &  96.4    &  25      &  4.4     & 0.084    & 2.9      & 6890     & 12.6     & 0.034201 & 20.9995  &  682    \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}scaling the data}
+        
+        \PY{c+c1}{\PYZsh{}keeping the So variable which is a factor out of scaling. Also, keeping the dependent variable out.}
+        
+        drops \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{So\PYZdq{}}\PY{p}{,}\PY{l+s}{\PYZdq{}}\PY{l+s}{Crime\PYZdq{}}\PY{p}{)}
+        df \PY{o}{\PYZlt{}\PYZhy{}} data\PY{p}{[} \PY{p}{,} \PY{o}{!}\PY{p}{(}\PY{k+kp}{names}\PY{p}{(}data\PY{p}{)} \PY{o}{\PYZpc{}in\PYZpc{}} drops\PY{p}{)}\PY{p}{]}
+        scaled\PYZus{}data \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{scale}\PY{p}{(}df\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}binding the data altogether.}
+        scaled\PYZus{}data \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}scaled\PYZus{}data\PY{p}{,} data\PY{p}{[}\PY{p}{,}drops\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kp}{head}\PY{p}{(}scaled\PYZus{}data\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllllllllll}
+ M & Ed & Po1 & Po2 & LF & M.F & Pop & NW & U1 & U2 & Wealth & Ineq & Prob & Time & So & Crime\\
+\hline
+	  0.9886930   & -1.3085099   & -0.9085105   & -0.8666988   & -1.2667456   & -1.12060499  & -0.09500679  &  1.943738564 &  0.69510600  &  0.8313680   & -1.3616094   &  1.6793638   &  1.6497631   & -0.05599367  & 1            &  791        \\
+	  0.3521372   &  0.6580587   &  0.6056737   &  0.5280852   &  0.5396568   &  0.98341752  & -0.62033844  &  0.008483424 &  0.02950365  &  0.2393332   &  0.3276683   &  0.0000000   & -0.7693365   & -0.18315796  & 0            & 1635        \\
+	  0.2725678   & -1.4872888   & -1.3459415   & -1.2958632   & -0.6976051   & -0.47582390  & -0.48900552  &  1.146296747 & -0.08143007  & -0.1158877   & -2.1492481   &  1.4036474   &  1.5969416   & -0.32416470  & 1            &  578        \\
+	 -0.2048491   &  1.3731746   &  2.1535064   &  2.1732150   &  0.3911854   &  0.37257228  &  3.16204944  & -0.205464381 &  0.36230482  &  0.5945541   &  1.5298536   & -0.6767585   & -1.3761895   &  0.46611085  & 0            & 1969        \\
+	  0.1929983   &  1.3731746   &  0.8075649   &  0.7426673   &  0.7376187   &  0.06714965  & -0.48900552  & -0.691709391 & -0.24783066  & -1.6551781   &  0.5453053   & -0.5013026   & -0.2503580   & -0.74759413  & 0            & 1234        \\
+	 -1.3983912   &  0.3898903   &  1.1104017   &  1.2433590   & -0.3511718   & -0.64550313  & -0.30513945  & -0.555560788 & -0.63609870  & -0.5895155   &  1.6956723   & -1.7044289   & -0.5669349   & -0.78996812  & 0            &  682        \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kp}{options}\PY{p}{(}warn\PY{o}{=}\PY{l+m}{\PYZhy{}1}\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}caret\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}leaps\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}MASS\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}glmnet\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Loading required package: lattice
+Loading required package: ggplot2
+Loading required package: Matrix
+Loading required package: foreach
+Loaded glmnet 2.0-13
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k+kp}{set.seed}\PY{p}{(}\PY{l+m}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    References:
+
+http://www.sthda.com/english/articles/37-model-selection-essentials-in-r/154-stepwise-regression-essentials-in-r/
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}defining a control method to do repeated cv}
+        
+        control \PY{o}{\PYZlt{}\PYZhy{}} trainControl\PY{p}{(}method \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{repeatedcv\PYZdq{}}\PY{p}{,} number \PY{o}{=} \PY{l+m}{5}\PY{p}{,} repeats \PY{o}{=} \PY{l+m}{5}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}here we use the train function from caret package. method = \PYZdq{}leapSeq\PYZdq{} is for stepwise regression.}
+        \PY{c+c1}{\PYZsh{}tuneGrid = data.frame(nvmax = 1:15) means that it will try all the models with 1 features upto 15 features.}
+        \PY{c+c1}{\PYZsh{}the best 1\PYZhy{}variable model, the best 2\PYZhy{}variables model, …, the best 15\PYZhy{}variables model}
+        
+        lm\PYZus{}step \PY{o}{\PYZlt{}\PYZhy{}} train\PY{p}{(}Crime \PY{o}{\PYZti{}}\PY{l+m}{.}\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{,} method \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{leapSeq\PYZdq{}}\PY{p}{,} 
+                             tuneGrid \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}nvmax \PY{o}{=} \PY{l+m}{1}\PY{o}{:}\PY{l+m}{15}\PY{p}{)}\PY{p}{,} trControl \PY{o}{=} control\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}here we print the stats for all nvmax best models}
+        
+        lm\PYZus{}step\PY{o}{\PYZdl{}}results
+\end{Verbatim}
+
+
+    \begin{tabular}{r|lllllll}
+ nvmax & RMSE & Rsquared & MAE & RMSESD & RsquaredSD & MAESD\\
+\hline
+	  1        & 282.9300  & 0.4999792 & 226.2151  & 70.67819  & 0.2125575 & 53.74191 \\
+	  2        & 310.7000  & 0.4334649 & 248.3198  & 86.46990  & 0.2741488 & 72.16826 \\
+	  3        & 273.1027  & 0.5310749 & 214.0348  & 74.52462  & 0.2073685 & 61.93288 \\
+	  4        & 298.4097  & 0.4655277 & 236.8706  & 53.48436  & 0.1921420 & 42.46384 \\
+	  5        & 289.2306  & 0.4869785 & 233.2909  & 62.55661  & 0.2145011 & 56.34413 \\
+	  6        & 279.3289  & 0.5446330 & 221.5333  & 80.05025  & 0.2078361 & 68.68278 \\
+	  7        & 286.6147  & 0.5283167 & 224.7424  & 71.09796  & 0.1956827 & 64.51009 \\
+	  8        & 286.9273  & 0.4869795 & 227.3073  & 60.09801  & 0.2087288 & 54.08324 \\
+	  9        & 299.6539  & 0.4934172 & 231.2610  & 63.50853  & 0.1798948 & 59.63639 \\
+	 10        & 292.4513  & 0.5150836 & 228.5901  & 66.06529  & 0.1939786 & 55.64956 \\
+	 11        & 297.3778  & 0.4640345 & 231.5788  & 60.65984  & 0.1975678 & 57.45597 \\
+	 12        & 285.4662  & 0.5157689 & 224.6591  & 60.03197  & 0.2114072 & 57.48195 \\
+	 13        & 282.2549  & 0.5349635 & 222.1849  & 61.77533  & 0.2103352 & 53.76748 \\
+	 14        & 286.1901  & 0.5362130 & 224.7453  & 64.94866  & 0.1970353 & 57.80696 \\
+	 15        & 292.0083  & 0.5197076 & 229.6161  & 61.32444  & 0.2019892 & 56.76443 \\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}it can be seen that the best model is one with 3 features. Also, good point to note}
+        \PY{c+c1}{\PYZsh{} different seed values give different nvmax. When I set seed = 42, I got nvmax = 6 }
+        lm\PYZus{}step\PY{o}{\PYZdl{}}bestTune
+\end{Verbatim}
+
+
+    \begin{tabular}{r|l}
+  & nvmax\\
+\hline
+	3 & 3\\
+\end{tabular}
+
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}printing the summary to know the 3 features}
+         
+         \PY{k+kp}{summary}\PY{p}{(}lm\PYZus{}step\PY{o}{\PYZdl{}}finalModel\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+Subset selection object
+15 Variables  (and intercept)
+       Forced in Forced out
+M          FALSE      FALSE
+Ed         FALSE      FALSE
+Po1        FALSE      FALSE
+Po2        FALSE      FALSE
+LF         FALSE      FALSE
+M.F        FALSE      FALSE
+Pop        FALSE      FALSE
+NW         FALSE      FALSE
+U1         FALSE      FALSE
+U2         FALSE      FALSE
+Wealth     FALSE      FALSE
+Ineq       FALSE      FALSE
+Prob       FALSE      FALSE
+Time       FALSE      FALSE
+So         FALSE      FALSE
+1 subsets of each size up to 3
+Selection Algorithm: 'sequential replacement'
+         M   Ed  Po1 Po2 LF  M.F Pop NW  U1  U2  Wealth Ineq Prob Time So 
+1  ( 1 ) " " " " "*" " " " " " " " " " " " " " " " "    " "  " "  " "  " "
+2  ( 1 ) " " " " "*" " " " " " " " " " " " " " " " "    "*"  " "  " "  " "
+3  ( 1 ) " " "*" "*" " " " " " " " " " " " " " " " "    "*"  " "  " "  " "
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} * indicates that the features was included in the model.}
+         \PY{c+c1}{\PYZsh{} so the features selected are Ed, Po1, Ineq}
+         \PY{c+c1}{\PYZsh{}Using those features to fit the linear regression model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{}fitting simple linear regression model on those 3 features}
+         
+         mod \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}} Ed \PY{o}{+} Po1 \PY{o}{+} Ineq\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{)}
+         \PY{k+kp}{summary}\PY{p}{(}mod\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+lm(formula = Crime ~ Ed + Po1 + Ineq, data = scaled_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-590.30 -102.06   -1.73  129.16  511.60 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   905.09      33.74  26.825  < 2e-16 ***
+Ed            176.61      53.32   3.312  0.00188 ** 
+Po1           369.45      43.94   8.408 1.26e-10 ***
+Ineq          299.45      60.15   4.978 1.09e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 231.3 on 43 degrees of freedom
+Multiple R-squared:  0.6656,	Adjusted R-squared:  0.6423 
+F-statistic: 28.53 on 3 and 43 DF,  p-value: 2.59e-10
+
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{}all the coefficients are significant as per the p\PYZhy{}value.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}now lets perform leave out one cross validation and get the R squared.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} test \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{numeric}\PY{p}{(}\PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}scaled\PYZus{}data\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+             model \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}} Ed \PY{o}{+} Po1 \PY{o}{+}Ineq\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{[}\PY{o}{\PYZhy{}}i\PY{p}{,}\PY{p}{]}\PY{p}{)}
+             test \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}test\PY{p}{,} predict\PY{p}{(}model\PY{p}{,} newdata \PY{o}{=} scaled\PYZus{}data\PY{p}{[}i\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{}function to calculate r\PYZhy{}squared}
+         
+         compute\PYZus{}rsquared \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}y\PYZus{}hat\PY{p}{,} y\PY{p}{)}\PY{p}{\PYZob{}}
+         SSR \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sum}\PY{p}{(}\PY{p}{(}y\PYZus{}hat \PY{o}{\PYZhy{}} y\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}
+         SST \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{sum}\PY{p}{(}\PY{p}{(}y \PY{o}{\PYZhy{}} \PY{k+kp}{mean}\PY{p}{(}y\PY{p}{)}\PY{p}{)}\PY{o}{\PYZca{}}\PY{l+m}{2}\PY{p}{)}
+         rsquared \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+m}{1} \PY{o}{\PYZhy{}} SSR\PY{o}{/}SST
+         \PY{k+kr}{return} \PY{p}{(}rsquared\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} compute\PYZus{}rsquared\PY{p}{(}test\PY{p}{,} scaled\PYZus{}data\PY{o}{\PYZdl{}}Crime\PY{p}{)}
+\end{Verbatim}
+
+
+    0.574751286403875
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}Using just three features we were able to get Rsquared of 0.57. Please note \PYZhy{}\PYZhy{} adding more features will}
+         \PY{c+c1}{\PYZsh{}definitely increase Rsquared. But we need to strike a balance between simplicity and generalization.}
+         \PY{c+c1}{\PYZsh{}i was able to get a pretty simple model using just three features.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} full.model \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}}\PY{l+m}{.}\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Stepwise regression model}
+         step.model \PY{o}{\PYZlt{}\PYZhy{}} stepAIC\PY{p}{(}full.model\PY{p}{,} direction \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{both\PYZdq{}}\PY{p}{,} 
+                               trace \PY{o}{=} \PY{k+kc}{FALSE}\PY{p}{)}
+         \PY{k+kp}{summary}\PY{p}{(}step.model\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+lm(formula = Crime ~ M + Ed + Po1 + M.F + U1 + U2 + Ineq + Prob, 
+    data = scaled_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-444.70 -111.07    3.03  122.15  483.30 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   905.09      28.52  31.731  < 2e-16 ***
+M             117.28      42.10   2.786  0.00828 ** 
+Ed            201.50      59.02   3.414  0.00153 ** 
+Po1           305.07      46.14   6.613 8.26e-08 ***
+M.F            65.83      40.08   1.642  0.10874    
+U1           -109.73      60.20  -1.823  0.07622 .  
+U2            158.22      61.22   2.585  0.01371 *  
+Ineq          244.70      55.69   4.394 8.63e-05 ***
+Prob          -86.31      33.89  -2.547  0.01505 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 195.5 on 38 degrees of freedom
+Multiple R-squared:  0.7888,	Adjusted R-squared:  0.7444 
+F-statistic: 17.74 on 8 and 38 DF,  p-value: 1.159e-10
+
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c+c1}{\PYZsh{}So the above model selected 8 features and was able to get a rsquared of 0.7888}
+         \PY{c+c1}{\PYZsh{}and adjusted r\PYZhy{}squared of 0.7444.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{}using the above model... lets cross validate}
+         test1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{numeric}\PY{p}{(}\PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}scaled\PYZus{}data\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+             model \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}} M \PY{o}{+} Ed \PY{o}{+} Po1 \PY{o}{+} M.F \PY{o}{+} U1 \PY{o}{+} U2 \PY{o}{+} Ineq \PY{o}{+} Prob\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{[}\PY{o}{\PYZhy{}}i\PY{p}{,}\PY{p}{]}\PY{p}{)}
+             test1 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}test1\PY{p}{,} predict\PY{p}{(}model\PY{p}{,} newdata \PY{o}{=} scaled\PYZus{}data\PY{p}{[}i\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} compute\PYZus{}rsquared\PY{p}{(}test1\PY{p}{,} scaled\PYZus{}data\PY{o}{\PYZdl{}}Crime\PY{p}{)}
+\end{Verbatim}
+
+
+    0.667620969502124
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{}But it can be seen that M.F and U1 are not that siginificant }
+         \PY{c+c1}{\PYZsh{}as per p\PYZhy{}value so lets take that out.}
+         
+         \PY{c+c1}{\PYZsh{}using the above model... lets cross validate}
+         test2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{numeric}\PY{p}{(}\PY{p}{)}
+         \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}scaled\PYZus{}data\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+             model \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}} M \PY{o}{+} Ed \PY{o}{+} Po1 \PY{o}{+} U2 \PY{o}{+} Ineq \PY{o}{+} Prob\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{[}\PY{o}{\PYZhy{}}i\PY{p}{,}\PY{p}{]}\PY{p}{)}
+             test2 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}test2\PY{p}{,} predict\PY{p}{(}model\PY{p}{,} newdata \PY{o}{=} scaled\PYZus{}data\PY{p}{[}i\PY{p}{,}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} compute\PYZus{}rsquared\PY{p}{(}test2\PY{p}{,} scaled\PYZus{}data\PY{o}{\PYZdl{}}Crime\PY{p}{)}
+\end{Verbatim}
+
+
+    0.666163842867471
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c+c1}{\PYZsh{}So it can be seen that, we were able to get about the same r\PYZhy{}squared by omitting M.F and U1. }
+         \PY{c+c1}{\PYZsh{}Occam\PYZsq{}s razor \PYZhy{}\PYZhy{} the simpler the better.}
+         \PY{c+c1}{\PYZsh{}Hence we would go with the latter one with just 6 features.}
+\end{Verbatim}
+
+
+    Now it is quite a judgement call here. We have two models one with 3
+features and other with 6 features. The final selection totally depends
+upon whether we want simplicity or generalization.
+
+    \section{Lasso Regression}\label{lasso-regression}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} lasso\PYZus{}model \PY{o}{=} cv.glmnet\PY{p}{(}x \PY{o}{=} \PY{k+kp}{as.matrix}\PY{p}{(}scaled\PYZus{}data\PY{p}{[}\PY{p}{,}\PY{l+m}{\PYZhy{}16}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                 y \PY{o}{=} \PY{k+kp}{as.matrix}\PY{p}{(}scaled\PYZus{}data\PY{o}{\PYZdl{}}Crime\PY{p}{)}\PY{p}{,}
+                                 alpha \PY{o}{=} \PY{l+m}{1}\PY{p}{,} nfolds \PY{o}{=} \PY{l+m}{5}\PY{p}{,}
+                                 type.measure \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{mse\PYZdq{}}\PY{p}{,} family \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{gaussian\PYZdq{}}\PY{p}{,} standardize \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} lasso\PYZus{}model
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+$lambda
+ [1] 260.2814612 237.1587736 216.0902418 196.8933803 179.4019150 163.4643433
+ [7] 148.9426216 135.7109696 123.6547811 112.6696312 102.6603717  93.5403072
+[13]  85.2304441  77.6588063  70.7598120  64.4737054  58.7460391  53.5272029
+[19]  48.7719937  44.4392242  40.4913660  36.8942246  33.6166434  30.6302335
+[25]  27.9091279  25.4297579  23.1706483  21.1122318  19.2366793  17.5277457
+[31]  15.9706291  14.5518424  13.2590969  12.0811952  11.0079352  10.0300205
+[37]   9.1389812   8.3270993   7.5873427   6.9133041   6.2991452   5.7395465
+[43]   5.2296610   4.7650723   4.3417565   3.9560468   3.6046025   3.2843795
+[49]   2.9926043   2.7267496   2.4845127   2.2637954   2.0626861   1.8794427
+[55]   1.7124782   1.5603464   1.4217295   1.2954270   1.1803448   1.0754862
+[61]   0.9799430   0.8928876   0.8135659   0.7412909   0.6754367   0.6154328
+[67]   0.5607594   0.5109431   0.4655523   0.4241939   0.3865097   0.3521733
+[73]   0.3208872   0.2923804   0.2664061
+
+$cvm
+ [1] 145826.80 142162.52 136720.36 128986.49 122615.74 117372.22 113030.77
+ [8] 109190.33 105894.32 103045.85 100968.76  99444.38  98316.42  97599.12
+[15]  96893.45  95717.79  93560.54  90268.30  87180.21  84856.90  82851.73
+[22]  81247.48  79741.87  78108.00  75845.12  73630.84  71379.19  68963.85
+[29]  67177.64  65867.71  64735.74  63927.27  63312.68  62864.51  62936.45
+[36]  63170.13  63362.86  63288.38  63349.75  63406.67  63468.32  63593.58
+[43]  63757.60  63946.58  64161.48  64412.40  64726.41  65256.90  65993.48
+[50]  66685.82  67208.62  67754.40  68262.80  68796.78  69325.67  69780.42
+[57]  70227.05  70660.63  71069.55  71459.47  71815.03  72174.90  72513.98
+[64]  72842.40  73135.52  73405.11  73658.93  73885.81  74099.19  74296.06
+[71]  74478.23  74629.45  74772.41  74904.31  75025.78
+
+$cvsd
+ [1] 30833.26 32189.43 31448.90 28670.62 26213.00 24057.37 22171.84 20419.36
+ [9] 18899.04 17610.39 16619.38 15841.90 15263.54 14922.87 14824.25 14835.13
+[17] 14712.28 14635.46 14689.81 14856.27 15011.28 15155.07 15400.04 15622.36
+[25] 15237.15 14875.81 14449.95 14082.18 13791.42 13556.77 13392.32 13228.64
+[33] 13080.19 12988.30 13105.46 13257.97 13303.73 13298.18 13271.08 13253.50
+[41] 13247.52 13236.88 13226.06 13213.93 13199.09 13177.26 13133.24 13091.20
+[49] 13113.98 13142.55 13054.33 13032.83 12990.46 12968.60 12939.69 12939.30
+[57] 12945.52 12942.86 12949.56 12954.77 12961.84 12981.55 13016.57 13065.06
+[65] 13109.91 13151.54 13193.91 13239.68 13279.49 13315.02 13351.15 13378.89
+[73] 13403.56 13429.20 13451.80
+
+$cvup
+ [1] 176660.07 174351.95 168169.26 157657.11 148828.74 141429.58 135202.61
+ [8] 129609.69 124793.36 120656.24 117588.13 115286.28 113579.96 112522.00
+[15] 111717.70 110552.92 108272.82 104903.75 101870.02  99713.16  97863.01
+[22]  96402.55  95141.91  93730.37  91082.27  88506.66  85829.14  83046.04
+[29]  80969.06  79424.48  78128.06  77155.91  76392.87  75852.80  76041.91
+[36]  76428.10  76666.59  76586.56  76620.83  76660.17  76715.85  76830.46
+[43]  76983.66  77160.50  77360.57  77589.66  77859.64  78348.10  79107.46
+[50]  79828.37  80262.95  80787.23  81253.26  81765.39  82265.35  82719.72
+[57]  83172.57  83603.48  84019.12  84414.24  84776.86  85156.45  85530.54
+[64]  85907.46  86245.43  86556.66  86852.84  87125.49  87378.68  87611.07
+[71]  87829.37  88008.34  88175.97  88333.50  88477.58
+
+$cvlo
+ [1] 114993.54 109973.09 105271.47 100315.88  96402.73  93314.85  90858.93
+ [8]  88770.97  86995.29  85435.46  84349.38  83602.48  83052.89  82676.25
+[15]  82069.20  80882.65  78848.26  75632.84  72490.40  70000.63  67840.44
+[22]  66092.41  64341.83  62485.64  60607.98  58755.03  56929.25  54881.67
+[29]  53386.23  52310.94  51343.41  50698.63  50232.49  49876.21  49830.99
+[36]  49912.16  50059.13  49990.20  50078.68  50153.18  50220.80  50356.70
+[43]  50531.55  50732.65  50962.39  51235.14  51593.17  52165.69  52879.50
+[50]  53543.27  54154.29  54721.57  55272.34  55828.18  56385.98  56841.13
+[57]  57281.53  57717.77  58119.99  58504.70  58853.19  59193.35  59497.41
+[64]  59777.33  60025.60  60253.57  60465.01  60646.12  60819.70  60981.04
+[71]  61127.08  61250.57  61368.85  61475.11  61573.99
+
+$nzero
+ s0  s1  s2  s3  s4  s5  s6  s7  s8  s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 
+  0   1   1   1   1   1   1   1   1   1   1   1   1   1   3   4   4   5   5   5 
+s20 s21 s22 s23 s24 s25 s26 s27 s28 s29 s30 s31 s32 s33 s34 s35 s36 s37 s38 s39 
+  5   5   5   6   7   8   8   8   8   8   8   9   9   9   9  10  10  10  11  11 
+s40 s41 s42 s43 s44 s45 s46 s47 s48 s49 s50 s51 s52 s53 s54 s55 s56 s57 s58 s59 
+ 11  11  11  11  11  11  11  12  12  12  13  13  13  14  14  14  14  14  15  15 
+s60 s61 s62 s63 s64 s65 s66 s67 s68 s69 s70 s71 s72 s73 s74 
+ 15  15  15  15  15  15  15  15  15  15  15  15  14  14  14 
+
+$name
+                 mse 
+"Mean-Squared Error" 
+
+$glmnet.fit
+
+Call:  glmnet(x = as.matrix(scaled_data[, -16]), y = as.matrix(scaled_data$Crime),      alpha = 1, family = "gaussian", standardize = F) 
+
+      Df    %Dev    Lambda
+ [1,]  0 0.00000 260.30000
+ [2,]  1 0.08027 237.20000
+ [3,]  1 0.14690 216.10000
+ [4,]  1 0.20220 196.90000
+ [5,]  1 0.24820 179.40000
+ [6,]  1 0.28630 163.50000
+ [7,]  1 0.31800 148.90000
+ [8,]  1 0.34430 135.70000
+ [9,]  1 0.36610 123.70000
+[10,]  1 0.38420 112.70000
+[11,]  1 0.39920 102.70000
+[12,]  1 0.41170  93.54000
+[13,]  1 0.42210  85.23000
+[14,]  1 0.43070  77.66000
+[15,]  3 0.44240  70.76000
+[16,]  4 0.45870  64.47000
+[17,]  4 0.48700  58.75000
+[18,]  5 0.52490  53.53000
+[19,]  5 0.55650  48.77000
+[20,]  5 0.58260  44.44000
+[21,]  5 0.60430  40.49000
+[22,]  5 0.62240  36.89000
+[23,]  5 0.63730  33.62000
+[24,]  6 0.64980  30.63000
+[25,]  7 0.66700  27.91000
+[26,]  8 0.68230  25.43000
+[27,]  8 0.69750  23.17000
+[28,]  8 0.71000  21.11000
+[29,]  8 0.72040  19.24000
+[30,]  8 0.72900  17.53000
+[31,]  8 0.73610  15.97000
+[32,]  9 0.74290  14.55000
+[33,]  9 0.75080  13.26000
+[34,]  9 0.75730  12.08000
+[35,]  9 0.76270  11.01000
+[36,] 10 0.76790  10.03000
+[37,] 10 0.77220   9.13900
+[38,] 10 0.77580   8.32700
+[39,] 11 0.77930   7.58700
+[40,] 11 0.78230   6.91300
+[41,] 11 0.78480   6.29900
+[42,] 11 0.78680   5.74000
+[43,] 11 0.78850   5.23000
+[44,] 11 0.79000   4.76500
+[45,] 11 0.79110   4.34200
+[46,] 11 0.79210   3.95600
+[47,] 11 0.79290   3.60500
+[48,] 12 0.79360   3.28400
+[49,] 12 0.79420   2.99300
+[50,] 12 0.79470   2.72700
+[51,] 13 0.79510   2.48500
+[52,] 13 0.79550   2.26400
+[53,] 13 0.79580   2.06300
+[54,] 14 0.79610   1.87900
+[55,] 14 0.79630   1.71200
+[56,] 14 0.79650   1.56000
+[57,] 14 0.79670   1.42200
+[58,] 14 0.79690   1.29500
+[59,] 15 0.79710   1.18000
+[60,] 15 0.79800   1.07500
+[61,] 15 0.79880   0.97990
+[62,] 15 0.79950   0.89290
+[63,] 15 0.80010   0.81360
+[64,] 15 0.80060   0.74130
+[65,] 15 0.80100   0.67540
+[66,] 15 0.80130   0.61540
+[67,] 15 0.80160   0.56080
+[68,] 15 0.80180   0.51090
+[69,] 15 0.80200   0.46560
+[70,] 15 0.80220   0.42420
+[71,] 15 0.80230   0.38650
+[72,] 15 0.80240   0.35220
+[73,] 14 0.80250   0.32090
+[74,] 14 0.80260   0.29240
+[75,] 14 0.80270   0.26640
+[76,] 14 0.80270   0.24270
+[77,] 14 0.80280   0.22120
+[78,] 14 0.80280   0.20150
+[79,] 14 0.80290   0.18360
+[80,] 14 0.80290   0.16730
+[81,] 14 0.80290   0.15240
+[82,] 14 0.80290   0.13890
+[83,] 14 0.80300   0.12660
+[84,] 14 0.80300   0.11530
+[85,] 14 0.80300   0.10510
+[86,] 14 0.80300   0.09574
+[87,] 14 0.80300   0.08724
+[88,] 14 0.80300   0.07949
+
+$lambda.min
+[1] 12.0812
+
+$lambda.1se
+[1] 27.90913
+
+attr(,"class")
+[1] "cv.glmnet"
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} coef\PY{p}{(}lasso\PYZus{}model\PY{p}{,} s \PY{o}{=} lasso\PYZus{}model\PY{o}{\PYZdl{}}lambda.min\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+16 x 1 sparse Matrix of class "dgCMatrix"
+                    1
+(Intercept) 905.08511
+M            85.09006
+Ed          115.31161
+Po1         309.89409
+Po2           .      
+LF            .      
+M.F          50.46511
+Pop           .      
+NW           10.57842
+U1          -21.05244
+U2           52.84583
+Wealth        .      
+Ineq        182.41508
+Prob        -75.82115
+Time          .      
+So            .      
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} plot\PY{p}{(}lasso\PYZus{}model\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{}fitting a model with the above 9 variables. These variables are same to stepAIC}
+         
+         lm\PYZus{}lasso \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}} M \PY{o}{+} Ed \PY{o}{+} Po1 \PY{o}{+} M.F \PY{o}{+} NW \PY{o}{+} U1 \PY{o}{+} U2 \PY{o}{+} Ineq \PY{o}{+} Prob\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{k+kp}{summary}\PY{p}{(}lm\PYZus{}lasso\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+lm(formula = Crime ~ M + Ed + Po1 + M.F + NW + U1 + U2 + Ineq + 
+    Prob, data = scaled_data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-439.2 -102.2   -6.3  124.1  476.6 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   905.09      28.87  31.352  < 2e-16 ***
+M             111.23      46.83   2.375 0.022820 *  
+Ed            203.63      60.12   3.387 0.001687 ** 
+Po1           297.89      52.08   5.719 1.51e-06 ***
+M.F            68.74      41.63   1.651 0.107134    
+NW             16.55      53.15   0.311 0.757222    
+U1           -109.46      60.94  -1.796 0.080609 .  
+U2            156.94      62.09   2.528 0.015889 *  
+Ineq          236.70      61.95   3.821 0.000492 ***
+Prob          -89.99      36.28  -2.481 0.017791 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 197.9 on 37 degrees of freedom
+Multiple R-squared:  0.7894,	Adjusted R-squared:  0.7381 
+F-statistic: 15.41 on 9 and 37 DF,  p-value: 4.881e-10
+
+    \end{verbatim}
+
+    
+    Point to note -\/- different value of seeds gives different results. One
+more point to note, the significant variables from the above model are
+same as the variables selected from step AIC. So I will not rerun the lm
+model on those 6 variables.
+
+    \section{Elastic Net}\label{elastic-net}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{c+c1}{\PYZsh{}we loop over different values of alpha. In each loop we select, minimum cross validation error and lambda.min}
+          
+          mse\PYZus{}list \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{numeric}\PY{p}{(}\PY{p}{)}
+          find\PYZus{}alpha \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kr}{function}\PY{p}{(}num\PY{p}{,} scaled\PYZus{}data\PY{p}{)}\PY{p}{\PYZob{}}
+              alpha \PY{o}{\PYZlt{}\PYZhy{}} num
+              elastic\PYZus{}net \PY{o}{\PYZlt{}\PYZhy{}} cv.glmnet\PY{p}{(}x\PY{o}{=}\PY{k+kp}{as.matrix}\PY{p}{(}scaled\PYZus{}data\PY{p}{[}\PY{p}{,}\PY{l+m}{\PYZhy{}16}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                  y\PY{o}{=}\PY{k+kp}{as.matrix}\PY{p}{(}scaled\PYZus{}data\PY{p}{[}\PY{p}{,}\PY{l+m}{16}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                  alpha \PY{o}{=} alpha\PY{p}{,}
+                                  nfolds\PY{o}{=}\PY{l+m}{5}\PY{p}{,}
+                                  type.measure\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{mse\PYZdq{}}\PY{p}{,}
+                                  family\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{gaussian\PYZdq{}}\PY{p}{,}
+                                  standardize\PY{o}{=}\PY{k+kc}{FALSE}\PY{p}{)}
+              
+                  mse\PYZus{}list \PY{o}{\PYZlt{}\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}mse\PYZus{}list\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}alpha\PY{p}{,} \PY{k+kp}{min}\PY{p}{(}elastic\PYZus{}net\PY{o}{\PYZdl{}}cvm\PY{p}{)}\PY{p}{,}elastic\PYZus{}net\PY{o}{\PYZdl{}}lambda.min\PY{p}{)}\PY{p}{)}    
+          \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{c+c1}{\PYZsh{}looping over different values of alpha}
+          
+          \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{k+kp}{seq}\PY{p}{(}\PY{l+m}{.01}\PY{p}{,}\PY{l+m}{1}\PY{p}{,}by \PY{o}{=} \PY{l+m}{.01}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}find\PYZus{}alpha\PY{p}{(}i\PY{p}{,}scaled\PYZus{}data\PY{p}{)}\PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} minIndex \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{which.min}\PY{p}{(}mse\PYZus{}list\PY{p}{[}\PY{l+m}{2}\PY{p}{,}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} mse\PYZus{}list\PY{p}{[}\PY{l+m}{2}\PY{p}{,}minIndex\PY{p}{]}
+\end{Verbatim}
+
+
+    50367.424492338
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} mse\PYZus{}list\PY{p}{[}\PY{l+m}{1}\PY{p}{,} minIndex\PY{p}{]}
+\end{Verbatim}
+
+
+    0.89
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{c+c1}{\PYZsh{}Using alpha = 0.89 and running the elastic net}
+          
+          elastic\PYZus{}net\PYZus{}final \PY{o}{\PYZlt{}\PYZhy{}} cv.glmnet\PY{p}{(}x\PY{o}{=}\PY{k+kp}{as.matrix}\PY{p}{(}scaled\PYZus{}data\PY{p}{[}\PY{p}{,}\PY{l+m}{\PYZhy{}16}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                  y\PY{o}{=}\PY{k+kp}{as.matrix}\PY{p}{(}scaled\PYZus{}data\PY{p}{[}\PY{p}{,}\PY{l+m}{16}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                                  alpha \PY{o}{=} \PY{l+m}{0.89}\PY{p}{,}
+                                  nfolds\PY{o}{=}\PY{l+m}{5}\PY{p}{,}
+                                  type.measure\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{mse\PYZdq{}}\PY{p}{,}
+                                  family\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{gaussian\PYZdq{}}\PY{p}{,}
+                                  standardize\PY{o}{=}\PY{k+kc}{FALSE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} coef\PY{p}{(}elastic\PYZus{}net\PYZus{}final\PY{p}{,} s \PY{o}{=} elastic\PYZus{}net\PYZus{}final\PY{o}{\PYZdl{}}lambda.min\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+16 x 1 sparse Matrix of class "dgCMatrix"
+                     1
+(Intercept) 901.772626
+M           110.002785
+Ed          186.022954
+Po1         292.041940
+Po2           .       
+LF           -2.821441
+M.F          51.181343
+Pop         -25.993778
+NW           21.045777
+U1          -85.025620
+U2          131.958964
+Wealth       72.742142
+Ineq        272.634500
+Prob        -91.904515
+Time         -3.396470
+So            9.730411
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{c+c1}{\PYZsh{}So elastic\PYZus{}net selects 14 variables. Let\PYZsq{}s rerun lm using those features.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} lm\PYZus{}elastic \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}} \PY{l+m}{.}\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{[}\PY{p}{,} \PY{l+m}{\PYZhy{}4}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{k+kp}{summary}\PY{p}{(}lm\PYZus{}elastic\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+
+Call:
+lm(formula = Crime ~ ., data = scaled_data[, -4])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-442.55 -116.46    8.86  118.26  473.49 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  903.155     58.889  15.336 2.66e-16 ***
+M            112.934     52.244   2.162 0.038232 *  
+Ed           198.350     68.044   2.915 0.006445 ** 
+Po1          286.864     71.091   4.035 0.000317 ***
+LF           -11.321     56.896  -0.199 0.843538    
+M.F           53.684     59.798   0.898 0.376026    
+Pop          -29.833     48.950  -0.609 0.546523    
+NW            25.149     63.619   0.395 0.695239    
+U1           -97.649     75.332  -1.296 0.204164    
+U2           143.034     69.378   2.062 0.047441 *  
+Wealth        87.540     99.662   0.878 0.386292    
+Ineq         290.076     90.023   3.222 0.002921 ** 
+Prob         -97.432     49.655  -1.962 0.058484 .  
+Time          -7.991     47.425  -0.168 0.867251    
+So             5.669    148.100   0.038 0.969705    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 208.6 on 32 degrees of freedom
+Multiple R-squared:  0.7976,	Adjusted R-squared:  0.709 
+F-statistic: 9.006 on 14 and 32 DF,  p-value: 1.673e-07
+
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{c+c1}{\PYZsh{}Again it can be seen that the siginificant variables are M, Ed, Po1, U2, Ineq, Prob. However lets perform}
+          \PY{c+c1}{\PYZsh{}cv using those 14 variables.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} test4 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{numeric}\PY{p}{(}\PY{p}{)}
+          \PY{k+kr}{for} \PY{p}{(}i \PY{k+kr}{in} \PY{l+m}{1}\PY{o}{:}\PY{k+kp}{nrow}\PY{p}{(}scaled\PYZus{}data\PY{p}{)}\PY{p}{)}\PY{p}{\PYZob{}}
+              model \PY{o}{\PYZlt{}\PYZhy{}} lm\PY{p}{(}Crime \PY{o}{\PYZti{}} \PY{l+m}{.}\PY{p}{,} data \PY{o}{=} scaled\PYZus{}data\PY{p}{[}\PY{o}{\PYZhy{}}i\PY{p}{,}\PY{l+m}{\PYZhy{}4}\PY{p}{]}\PY{p}{)}
+              test4 \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}test4\PY{p}{,} predict\PY{p}{(}model\PY{p}{,} newdata \PY{o}{=} scaled\PYZus{}data\PY{p}{[}i\PY{p}{,}\PY{l+m}{\PYZhy{}4}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} compute\PYZus{}rsquared\PY{p}{(}test4\PY{p}{,} scaled\PYZus{}data\PY{o}{\PYZdl{}}Crime\PY{p}{)}
+\end{Verbatim}
+
+
+    0.493682047286474
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{c+c1}{\PYZsh{}it can be seen that using those 14 variables we got a huge drop in r\PYZus{}square = 0.49}
+\end{Verbatim}
+
+
+    We saw that all models agreed on the final 6 variables - M, Ed, Po1, U2,
+Ineq, Prob. Also, I was able to get a very simple model with just 3
+features which had decent performance considering that we have 3
+features. I'm amazed that all other methods were selecting more features
+(more than 3) with very little improvement in performance. I would
+prefer as simple models as possible because it makes it easy to explain
+it to someone. Having worked as a data scientist, you always need to
+explain what the model is doing to the senior management.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
